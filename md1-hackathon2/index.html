@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="form">
+    <form>
+        <h1 class="title">Select Card</h1>
+        <div class="logo-select">
+
+            <label>
+                <input type="radio" name="brand" checked>
+                <img class="logo" src="./img/mastercard.jpg" alt="mastercard">
+            </label>
+            <label>
+                <input type="radio" name="brand">
+                <img class="logo" src="./img/visa.png" alt="visa">
+            </label>
+            <label>
+                <input type="radio" name="brand">
+                <img class="logo" src="./img/paypal.png" alt="paypal">
+            </label>
+            <label>
+                <input type="radio" name="brand">
+                <img class="logo" src="./img/amex.png" alt="amex">
+            </label>
+            <label>
+                <input type="radio" name="brand">
+                <img class="logo" src="./img/discover.jpg" alt="discover">
+            </label>
+        </div>
+        <div>
+            <label>Card Number</label>
+            <input type="text" id="number">
+        </div>
+        <div>
+            <label>Expiry Date</label>
+            <input type="text" id="date"/>
+        </div>
+        <div>
+            <label>CVC/CVV</label>
+            <input type="text" id="cvv"/>
+        </div>
+        <div>
+            <button id="save" onclick="add()">Save</button>
+        </div>
+    </form>
+</div>
+
+<div class="list">
+    <table id="table" border="1">
+        <th
+                colspan="8"
+                style="text-align: center;"
+        >
+            CARDS LIST
+        </th>
+
+        <tr>
+            <td>Card img</td>
+            <td>Card Number</td>
+            <td>Expiry Date</td>
+            <td>CVV</td>
+            <td colspan="3">Action</td>
+        </tr>
+        <tbody id="content"></tbody>
+    </table>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
