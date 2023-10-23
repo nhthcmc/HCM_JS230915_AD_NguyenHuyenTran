@@ -17,31 +17,29 @@ let card = [
         date: "03/09",
         cvv: "245",
     },
-]
-let listCards = [card];
+];
+let listCards = card;
 
 function display() {
-    // let newListCards = JSON.parse(localStorage.getItem("listCards"))
     let html = ``;
     for (let i = 0; i < listCards.length; i++) {
         html += `
-        <tr>
-        <td><img id="img" alt="img" src="${listCards[i].image}"></td>
-        <td>${listCards[i].number}</td>
-        <td>${listCards[i].date}</td>
-        <td>${listCards[i].cvv}</td>
-        <td><button >View</button></td>
-        <td><button onclick="pressEdit(${i})">Edit</button></td>
-        <td><button onclick="pressDelete(${i})">Delete</button></td>
-</tr>
-        `;
-        document.getElementById("content").innerHTML = html;
+      <tr>
+          <td><img id="img" alt="img" src="${listCards[i].img}"></td>
+          <td>${listCards[i].number}</td>
+          <td>${listCards[i].date}</td>
+          <td>${listCards[i].cvv}</td>
+          <td><button >View</button></td>
+          <td><button onclick="pressEdit(${i})">Edit</button></td>
+          <td><button onclick="pressDelete(${i})">Delete</button></td>
+      </tr>
+      `;
     }
+    document.getElementById("content").innerHTML = html;
     resetValue();
 }
 
 display();
-
 
 function resetValue() {
     setInputValue("img", "");
@@ -59,47 +57,42 @@ function setInputValue(id, value) {
 }
 
 function add() {
-    let img = getInputValue("img");
+    event.preventDefault();
+    let img = document.querySelector('input[name="brand"]:checked + img').src;
     let number = getInputValue("number");
     let date = getInputValue("date");
     let cvv = getInputValue("cvv");
-    listCards.push([{
+    listCards.push({
         img,
         number,
         date,
         cvv,
-    }]);
-    // localStorage.setItem("listCards", JSON.stringify(listCards))
+    });
     display();
-
 }
 
 function pressDelete(index) {
     listCards.splice(index, 1);
-    // localStorage.setItem("listCards", JSON.stringify(listCards))
     display();
 }
 
 function pressEdit(index) {
-    // let newListCards = JSON.parse(localStorage.getItem("listCards"))
-    // let card = newListCards[index];
+    let card = listCards[index];
     setInputValue("img", card.img);
     setInputValue("number", card.number);
     setInputValue("date", card.date);
     setInputValue("cvv", card.cvv);
-    document.getElementById("save").value = index;
+    document.getElementById("save").setAttribute("onclick", `pressSave(${index})`);
 }
 
-function pressSave() {
-    // let newListCards = JSON.parse(localStorage.getItem("listCards"))
-    let index = document.getElementById("save").value
-    let newCard = newListCards[index];
-    newCard.id = getInputValue("img")
-    newCard.name = getInputValue("number")
-    newCard.date = getInputValue("date")
-    newCard.gender = getInputValue("cvv")
-    newListCards[index] = newCard;
-    // localStorage.setItem("listStudent", JSON.stringify(newListCards))
-    display()
+function pressSave(index) {
+    event.preventDefault();
+    let newCard = {
+        img: getInputValue("img"),
+        number: getInputValue("number"),
+        date: getInputValue("date"),
+        cvv: getInputValue("cvv"),
+    };
+    listCards[index] = newCard;
+    display();
 }
-
